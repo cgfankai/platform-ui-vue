@@ -1,6 +1,6 @@
 <template>
-    <el-row>
-        <el-col :span="24">
+    <div id="table-contain" style="display: flex;flex-direction: column;">
+        <div style="margin-bottom: 10px;" id="search-bar">
             <el-space wrap>
                 <el-select placeholder="Select" style="width: 120px;" v-model="select1">
                     <el-option key="1" label="待办事项" value="item.value" />
@@ -16,26 +16,31 @@
                 <el-button type="primary" :icon="Search">搜索</el-button>
                 <el-button type="">重置</el-button>
             </el-space>
-        </el-col>
-
-    </el-row>
-    <el-row>
-        <el-col :span="24">
+        </div>
+        <div style="flex: 1;overflow: hidden;display: flex;flex-direction: column;margin-bottom: 10px;">
             <el-table :data="tableData" border style="width: 100%">
                 <el-table-column prop="date" label="Date" width="180" />
                 <el-table-column prop="name" label="Name" width="180" />
                 <el-table-column prop="address" label="Address" />
             </el-table>
-        </el-col>
+        </div>
+        <div>
+            <el-pagination current-page='1' :page-sizes="[100, 200, 300, 400]" size="default"
+                layout="total, sizes, prev, pager, next, jumper" :total="400" style="float: right;"/>
+        </div>
+    </div>
+    <el-row id="search-bar">
 
     </el-row>
     <el-row>
-        <el-pagination current-page='1' :page-sizes="[100, 200, 300, 400]" size="default"
-            layout="total, sizes, prev, pager, next, jumper" :total="400" />
+
+    </el-row>
+    <el-row>
+
     </el-row>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Search } from '@element-plus/icons-vue'
 const select1 = ref("item.value");
 const tableData = [
@@ -67,7 +72,19 @@ for (let i = 0; i < 100; i++) {
         address: 'No. 189, Grove St, Los Angeles',
     })
 }
-
+function resizeTableHeight() {
+    let searchBarHeight = document.querySelector("#search-bar")?.clientHeight
+    if (searchBarHeight == null) {
+        searchBarHeight = 0
+    }
+    document.querySelector("#table-contain").style.height =  (window.innerHeight - searchBarHeight - 120) + 'px'
+}
+onMounted(() => {
+    resizeTableHeight();
+    window.onresize = function () {
+        resizeTableHeight();
+    }
+});
 
 </script>
 <style>

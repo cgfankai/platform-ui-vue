@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import Layout from '../layout/Layout.vue'
-
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -8,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'layout',
-      component: Layout,
+      component: () => import("@/views/index/Index.vue"),
       children: [
         {
           path: '/4041',
@@ -25,7 +23,7 @@ const router = createRouter({
     {
       path: '/404',
       name: "404",
-      component:() => import('@/views/error/404.vue'),
+      component: () => import('@/views/error/404.vue'),
     }
   ]
 })

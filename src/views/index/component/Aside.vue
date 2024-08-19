@@ -1,9 +1,5 @@
 <template>
-
-    <el-menu active-text-color="#157FCC" background-color="#F2F5F7" class="el-menu-vertical-demo" default-active="2"
-        :collapse="!sideBarIsExpand" text-color="#000" @open="handleOpen" @close="handleClose"
-        :collapse-transition="false"
-        style="height: 100%;border-right-width: 0;">
+    <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#F2F5F7" style="border-right: 0;" :collapse="collapse">
         <el-sub-menu index="1">
             <template #title>
                 <el-icon>
@@ -11,38 +7,50 @@
                 </el-icon>
                 <span>Navigator One</span>
             </template>
-            <el-menu-item index="1-3">item three</el-menu-item>
+            <el-menu-item-group>
+                <template #title><span>Group One</span></template>
+                <el-menu-item index="1-1">item one</el-menu-item>
+                <el-menu-item index="1-2">item two</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="Group Two">
+                <el-menu-item index="1-3">item three</el-menu-item>
+            </el-menu-item-group>
             <el-sub-menu index="1-4">
-                <template #title>item four</template>
+                <template #title><span>item four</span></template>
                 <el-menu-item index="1-4-1">item one</el-menu-item>
             </el-sub-menu>
         </el-sub-menu>
         <el-menu-item index="2">
             <el-icon><icon-menu /></el-icon>
-            <span>Navigator Two</span>
+            <template #title>Navigator Two</template>
         </el-menu-item>
         <el-menu-item index="3" disabled>
             <el-icon>
                 <document />
             </el-icon>
-            <span>Navigator Three</span>
+            <template #title>Navigator Three</template>
         </el-menu-item>
         <el-menu-item index="4">
             <el-icon>
                 <setting />
             </el-icon>
-            <span>Navigator Four</span>
+            <template #title>Navigator Four</template>
         </el-menu-item>
     </el-menu>
 </template>
+
 <script lang="ts" setup>
+import { ref, } from 'vue'
 import {
     Document,
     Menu as IconMenu,
     Location,
     Setting,
 } from '@element-plus/icons-vue'
-const props = defineProps(['sideBarIsExpand'])
+
+
+const props = defineProps(['collapse'])
+
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
@@ -50,4 +58,9 @@ const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
 </script>
-<style></style>
+
+<style>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+}
+</style>

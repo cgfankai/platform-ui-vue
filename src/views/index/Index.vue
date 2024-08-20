@@ -69,6 +69,8 @@ const mainLeftPx = computed(() => {
     right: 0px;
     bottom: 30px;
     padding: 10px;
+    border: solid 1px #ddd; 
+    border-top: none;
 }
 
 .bottom {

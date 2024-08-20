@@ -1,12 +1,12 @@
 <template>
 
     <div class="full-screen">
-        <el-card style="width: 480px;" class="login-panel">
+        <el-card style="width: 400px;" class="login-panel">
             <div style="width: 100px; margin: 10px auto;">
                 <img src="@/assets/crcc tsy logo.png" style="width: 100px;"></img>
             </div>
 
-            <el-form :model="form" label-width="auto" style="width: 450px" :rules="rules" ref="ruleFormRef">
+            <el-form :model="form" label-width="auto" style="width: 100%;" :rules="rules" ref="ruleFormRef">
                 <el-form-item label="工号：" prop="code">
                     <el-input v-model="form.code" />
                 </el-form-item>
@@ -52,7 +52,7 @@ async function loginHandler(formEl: FormInstance | undefined) {
                 if (res.data.code == 200) {
                     jwtToken.setJwtToken(res.data.data);
                     jwtToken.setAuthenticate(true);
-                    route.push({name:"index"})
+                    route.push({ name: "index" })
                 } else {
                     ElNotification({
                         title: '错误',
@@ -80,10 +80,13 @@ async function loginHandler(formEl: FormInstance | undefined) {
     left: 0;
     right: 0;
     background-color: #888;
+    background-image: url("@/assets/loginbackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .login-panel {
     margin: 0 auto;
-    margin-top: calc(50vh - 220px);
+    margin-top: calc(50vh - 200px);
 }
 </style>

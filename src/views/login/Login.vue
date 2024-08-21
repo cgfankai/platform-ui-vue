@@ -24,7 +24,8 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue"
-import { login, SysUser } from '@/api/system/sysuser'
+import { login } from '@/api/system/sysuser'
+import type { SysUser } from '@/api/system/sysuser'
 import { ElNotification } from 'element-plus'
 import type { FormRules, FormInstance } from 'element-plus'
 import { useJwtTokenStore } from '@/stores/store'
@@ -33,7 +34,7 @@ const route = useRouter()
 const jwtToken = useJwtTokenStore();
 const loginButtonDisabled = ref(false)
 const ruleFormRef = ref<FormInstance>()
-const form = ref(new SysUser("", ""))
+const form = ref<SysUser>({ code: "", passwd: "" })
 const rules = ref<FormRules>({
     code: [
         { required: true, message: '请输入工号', trigger: 'blur' },
@@ -52,7 +53,7 @@ async function loginHandler(formEl: FormInstance | undefined) {
                 if (res.data.code == 200) {
                     jwtToken.setJwtToken(res.data.data);
                     jwtToken.setAuthenticate(true);
-                    route.push({ name: "index" })
+                    route.push({ name: "main" })
                 } else {
                     ElNotification({
                         title: '错误',

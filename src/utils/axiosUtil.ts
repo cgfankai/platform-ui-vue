@@ -1,16 +1,15 @@
 import axios from "axios";
+import { useJwtTokenStore } from '@/stores/store'
+const jwtToken = useJwtTokenStore();
 
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
     baseURL: import.meta.env.VITE_BASE_API,
-    // 超时
-    timeout: 10000
 });
 
-axios.interceptors.request.use(function (config) {
-
-    config.headers['Authorization'] = "Bearer qqqqqqqqqqqqweeertghjjjm";
+service.interceptors.request.use(function (config) {
+    config.headers['Authorization'] = "Bearer " + jwtToken.jwt;
     // Do something before request is sent
     return config;
 }, function (error) {

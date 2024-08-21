@@ -1,13 +1,12 @@
 <template>
 
     <div class="head">
-
-        <Head></Head>
+        <Head @collapse-toogle="collapseToogle()" :collapse="collapse"></Head>
     </div>
     <div class="aside" :style="{ 'width': mainLeftPx }">
         <Aside :collapse=collapse></Aside>
     </div>
-    <div class="tag" :style="{ 'left': mainLeftPx }">
+    <div class="tags" :style="{ 'left': mainLeftPx }">
         <Tag></Tag>
     </div>
     <div class="main" :style="{ 'left': mainLeftPx }">
@@ -29,9 +28,12 @@ import Tag from './component/Tag.vue';
 import { ref, computed } from "vue";
 const collapse = ref(false);
 const mainLeftPx = computed(() => {
-    return collapse.value ? "58px" : "200px"
+    return collapse.value ? "64px" : "200px"
 })
-
+function collapseToogle(){
+    console.info(111)
+    collapse.value = !collapse.value;
+}
 
 </script>
 <style>
@@ -55,7 +57,7 @@ const mainLeftPx = computed(() => {
     background-color: #F2F5F7;
 }
 
-.tag {
+.tags {
     position: absolute;
     top: 60px;
     right: 0px;

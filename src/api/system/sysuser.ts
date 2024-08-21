@@ -1,19 +1,17 @@
 import axiosUtils from "@/utils/axiosUtil"
 
-export class SysUser{
+
+export interface SysUser {
     code: string;
     passwd: string;
-    constructor(code: string, passwd: string) {
-        this.code = code;
-        this.passwd = passwd
-    }
 }
 
 //查询用户列表
-export function listUser() {
+export function listUser(listParam:any) {
     return axiosUtils({
         url: '/api/v1/system/sysuser/list',
         method: 'post',
+        data: listParam
     })
 }
 

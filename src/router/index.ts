@@ -10,9 +10,9 @@ const router = createRouter({
       component: () => import("@/views/index/Index.vue"),
       children: [
         {
-          path: '/4041',
-          name: "4041",
-          component: () => import('@/views/error/404.vue'),
+          path: '/main',
+          name: "main",
+          component: () => import('@/views/main/Main.vue'),
         },
         {
           path: '/system/sysuser',

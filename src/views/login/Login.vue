@@ -7,8 +7,8 @@
             </div>
 
             <el-form :model="form" label-width="auto" style="width: 100%;" :rules="rules" ref="ruleFormRef">
-                <el-form-item label="工号：" prop="code">
-                    <el-input v-model="form.code" />
+                <el-form-item label="工号：" prop="userCode">
+                    <el-input v-model="form.userCode" />
                 </el-form-item>
                 <el-form-item label="密码：" prop="passwd">
                     <el-input v-model="form.passwd" />
@@ -34,9 +34,9 @@ const route = useRouter()
 const jwtToken = useJwtTokenStore();
 const loginButtonDisabled = ref(false)
 const ruleFormRef = ref<FormInstance>()
-const form = ref<SysUser>({ code: "", passwd: "" })
+const form = ref<SysUser>({ userCode: "",passwd:""})
 const rules = ref<FormRules>({
-    code: [
+    userCode: [
         { required: true, message: '请输入工号', trigger: 'blur' },
     ],
     passwd: [

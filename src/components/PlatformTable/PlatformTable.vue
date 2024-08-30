@@ -12,26 +12,30 @@
         </div>
         <div style="flex: 1;overflow: hidden;display: flex;flex-direction: column;margin-bottom: 10px;">
             <el-table :data="tableData" border style="width: 100%">
-                <el-table-column prop="name">
+                <el-table-column prop="trueName">
                     <template #header>
                         <span style="font-weight: bold;">姓名</span>
-                        <el-input v-model="queryParam.name" size="small" placeholder="" />
+                        <el-input v-model="queryParam.trueName" size="small" placeholder="" />
                     </template>
                 </el-table-column>
-                <el-table-column prop="birthday">
+                <el-table-column prop="userCode">
                     <template #header>
-                        <span style="font-weight: bold;display: block;">出生日期</span>
-                        <el-date-picker v-model="queryParam.birthday"  value-format="YYYY-MM-DD" type="date" placeholder="" size="small"
-                            style="width: 100%" />
+                        <span style="font-weight: bold;display: block;">工号</span>
+                        <el-input v-model="queryParam.userCode" size="small" placeholder="" />
                     </template>
                 </el-table-column>
-                <el-table-column prop="sex">
+                <el-table-column prop="gender">
                     <template #header>
                         <span style="font-weight: bold;display: block;">性别</span>
-                        <el-select v-model="queryParam.sex" placeholder="" size="small" style="width: 100%" clearable>
-                            <el-option key="item.value1" label="男" value="男" />
-                            <el-option key="item.value2" label="女" value="女" />
+                        <el-select v-model="queryParam.gender" placeholder="" size="small" style="width: 100%"
+                            clearable>
+                            <el-option key="1" label="男" value="1" />
+                            <el-option key="2" label="女" value="2" />
                         </el-select>
+                    </template>
+                    <template #default="scope">
+                        <el-tag :type="scope.row.tag == 1 ? 'primary' : 'success'" disable-transitions>{{
+                            scope.row.gender }}</el-tag>
                     </template>
                 </el-table-column>
             </el-table>
@@ -59,9 +63,9 @@ import { listUser } from '@/api/system/sysuser';
 const todoSelect = ref("item.value");
 const loading = ref(false);
 const queryParam = ref({
-    sex: "",
-    name: "",
-    birthday: null,
+    gender: "",
+    trueName: "",
+    userCode: "",
 })
 const tableData = ref([]);
 const tableDataTotal = ref(0);
@@ -99,7 +103,7 @@ function resizeTableHeight() {
 function getList() {
     loading.value = true;
     listUser(listParam.value).then((response) => {
-        tableData.value = response.data.data.rows;
+        tableData.value = response.data.data.records;
         tableDataTotal.value = response.data.data.total;
         loading.value = false;
     })

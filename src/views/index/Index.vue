@@ -30,7 +30,7 @@ const collapse = ref(false);
 const mainLeftPx = computed(() => {
     return collapse.value ? "64px" : "200px"
 })
-function collapseToogle(){
+function collapseToogle() {
     console.info(111)
     collapse.value = !collapse.value;
 }
@@ -63,6 +63,7 @@ function collapseToogle(){
     right: 0px;
     height: 30px;
     border-bottom: solid 1px #ddd;
+    transition-duration: 0.28s
 }
 
 .main {
@@ -71,8 +72,9 @@ function collapseToogle(){
     right: 0px;
     bottom: 30px;
     padding: 10px;
-    border: solid 1px #ddd; 
+    border: solid 1px #ddd;
     border-top: none;
+    transition-duration: 0.28s
 }
 
 .bottom {

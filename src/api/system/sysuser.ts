@@ -2,14 +2,14 @@ import axiosUtils from "@/utils/axiosUtil"
 
 
 export interface SysUser {
-    code: string;
-    passwd: string;
+    userCode: string;
+    passwd?: string;
 }
 
 //查询用户列表
 export function listUser(listParam:any) {
     return axiosUtils({
-        url: '/api/v1/system/sysuser/list',
+        url: '/api/framework/sysuser/list',
         method: 'post',
         data: listParam
     })
@@ -19,7 +19,7 @@ export function listUser(listParam:any) {
 //查询用户列表
 export function login(user: SysUser) {
     return axiosUtils({
-        url: '/api/v1/system/sysuser/login',
+        url: '/api/framework/sysuser/login',
         method: 'post',
         data: user
     })

@@ -9,7 +9,7 @@ const service = axios.create({
 });
 
 service.interceptors.request.use(function (config) {
-    config.headers['Authorization'] = "Bearer " + jwtToken.jwt;
+    config.headers['Authorization'] = jwtToken.jwt;
     // Do something before request is sent
     return config;
 }, function (error) {
